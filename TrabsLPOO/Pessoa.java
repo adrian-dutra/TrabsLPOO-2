@@ -1,5 +1,6 @@
 import java.util.Scanner;
-abstract class Pessoa implements Verificavel{
+
+abstract class Pessoa implements Verificavel {
     private String nome;
     private String cpf;
     private Endereco endereco;
@@ -7,12 +8,11 @@ abstract class Pessoa implements Verificavel{
     private String celular;
     private String dataDeNacimento;
 
-    public Pessoa(String nome, String cpf, Endereco endereco, String celular){
+    public Pessoa(String nome, String cpf, Endereco endereco, String celular) {
         this.nome = nome;
-        if(validar(cpf) == true){
+        if (validar(cpf) == true) {
             this.cpf = cpf;
-        }
-        else{
+        } else {
             solicitaNovo();
         }
         this.endereco = endereco;
@@ -35,64 +35,71 @@ abstract class Pessoa implements Verificavel{
     public String getCelular() {
         return celular;
     }
-    
+
     @Override
-    public boolean validar(String cpf){
-        //tira as pontuações entre os números do CPF.
-        cpf = cpf.replace(".", "").replace("-", "");
-        //Verifica o tamanho do CPF.
-        if (cpf.length() != 11){
-            return false;
-        }
-        //tranforma o CPF de String para long.
-        try {
-            Long.parseLong(cpf);
-        } catch (NumberFormatException e){
+    public boolean validar(String cpf) {
+        cpf = cpf.replaceAll("[^0-9]", "");
+
+        // Verifica se o CPF tem 11 dígitos
+        if (cpf.length() != 11) {
             return false;
         }
 
-        int[] multiplicadores = {10, 9, 8, 7, 6, 5, 4, 3, 2};
-        //Aqui se faz a soma dos multiplicadores
+        // Verifica se todos os dígitos são iguais
+        if (cpf.matches("(\\d)\\1{10}")) {
+            return false;
+        }
+
+        // Calcula o primeiro dígito verificador
         int soma = 0;
-        for (int i = 0; i < 9; i++){
-            //Transforma dígito para String e depois tranforma para int.
-            soma += Integer.parseInt(String.valueOf(cpf.charAt(i))) * multiplicadores[i];
+        for (int i = 0; i < 9; i++) {
+            soma += Integer.parseInt(String.valueOf(cpf.charAt(i))) * (10 - i);
+        }
+        int primeiroDigito = 11 - (soma % 11);
+        if (primeiroDigito > 9) {
+            primeiroDigito = 0;
         }
 
-        //Faz o calculo dividindo por 11 e obtendo o resto para a verificação.
-        int resto = soma % 11;
-        //Se o resto for menor que 2, o primeiro dígito verificador é 0. Caso o resto seja maior ele será 11 menos resto.
-        int digitoVerificador1 = (resto < 2) ? 0 : 11 - resto;
-        //Se o primeiro dígito não for igual ao índice 9 do CPF, então ele não é valido.
-        if (digitoVerificador1 != Integer.parseInt(String.valueOf(cpf.charAt(9)))){
+        // Verifica o primeiro dígito verificador
+        if (Integer.parseInt(String.valueOf(cpf.charAt(9))) != primeiroDigito) {
             return false;
         }
-        //Aqui segue a mesma lógica do primeiro.
+
+        // Calcula o segundo dígito verificador
         soma = 0;
-        for (int i = 0; i < 10; i++){
-            soma += Integer.parseInt(String.valueOf(cpf.charAt(i))) * multiplicadores[i];
+        for (int i = 0; i < 10; i++) {
+            soma += Integer.parseInt(String.valueOf(cpf.charAt(i))) * (11 - i);
         }
-        resto = soma % 11;
-        int digitoVerificador2 = (resto < 2) ? 0 : 11 - resto;
-        //Se o segundo dígito vverificador for igual ao índice 10 do CPF, ele é valido e retorna true.
-        return digitoVerificador2 == Integer.parseInt(String.valueOf(cpf.charAt(10)));
-    }    
-    
-     @Override
-    public void solicitaNovo(){
+        int segundoDigito = 11 - (soma % 11);
+        if (segundoDigito > 9) {
+            segundoDigito = 0;
+        }
+
+        // Verifica o segundo dígito verificador
+        if (Integer.parseInt(String.valueOf(cpf.charAt(10))) != segundoDigito) {
+            return false;
+        }
+
+        // Formata o CPF
+        return true;
+    }
+
+    @Override
+    public void solicitaNovo() {
         Scanner r = new Scanner(System.in);
-        //define os atributos que serão utilizados, colocando codigoValido como falso para virificação.
+        // define os atributos que serão utilizados, colocando codigoValido como falso
+        // para virificação.
         boolean codigoValido = false;
         String novoCodigo = " ";
 
-        //Aqui é solicitado um novo CPF, se for valido o código sai do while.
-        while(!codigoValido){
+        // Aqui é solicitado um novo CPF, se for valido o código sai do while.
+        while (!codigoValido) {
             System.out.println("Informe um novo CPF:");
             novoCodigo = r.nextLine();
-            //Aqui é chamado o método validar, para verificar esse novo CPF.
+            // Aqui é chamado o método validar, para verificar esse novo CPF.
             codigoValido = validar(novoCodigo);
-            //Caso não valide, ele mostra essa mensagem para o usuário.
-            if (!codigoValido){
+            // Caso não valide, ele mostra essa mensagem para o usuário.
+            if (!codigoValido) {
                 System.out.println("CPF inválido. Por favor, tente novamente.");
             }
         }
