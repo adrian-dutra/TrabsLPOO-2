@@ -7,6 +7,6 @@ public class Cliente extends Pessoa{
     }
 
     public String toString(){
-        return "Cliente "+ getNome() + ", de CPF: " + getCpf() + ", localizado no endereço: "+ getEndereco() + ", Número do celular: " + getCelular() + ", com a pontuação: " + pontuacao;
+        return "Cliente "+ getNome() + ", de CPF: " + getCpf() + ", localizado no endereço: "+ getEndereco().toString() + ", Número do celular: " + getCelular() + ", com a pontuação: " + pontuacao;
     } 
 }

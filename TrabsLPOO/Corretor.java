@@ -7,6 +7,6 @@ public class Corretor extends Pessoa {
     }
 
     public String toString(){
-        return "Corretor "+ getNome() + ", de CPF: " + getCpf() + ", localizado no endereço: "+ getEndereco() + ", Número do celular: " + getCelular() + ", com o creci número: " + creci;
+        return "Corretor "+ getNome() + ", de CPF: " + getCpf() + ", localizado no endereço: "+ getEndereco().toString() + ", Número do celular: " + getCelular() + ", com o creci número: " + creci;
     } 
 }

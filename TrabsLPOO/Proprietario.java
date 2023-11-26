@@ -7,6 +7,6 @@ public class Proprietario extends Pessoa{
     }
 
     public String toString(){
-        return "Proprietario "+ getNome() + ", de CPF: " + getCpf() + ", localizado no endereço: "+ getEndereco() + ", Número do celular: " + getCelular() + ", PIX: " + pix;
+        return "Proprietario "+ getNome() + ", de CPF: " + getCpf() + ", localizado no endereço: "+ getEndereco().toString() + ", Número do celular: " + getCelular() + ", PIX: " + pix;
     } 
 }
