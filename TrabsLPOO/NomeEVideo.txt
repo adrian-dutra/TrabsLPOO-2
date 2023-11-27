@@ -1,0 +1,59 @@
+Aluno: Adriano Araújo Dutra
+
+CIDADES:
+
+flores
+207
+sao francisco
+campo grande
+79010650
+
+tijuca
+55 
+monte castelo
+campo grande
+79010460
+
+monções
+45
+chacara cachoeira
+campo grande
+79010330
+
+13 de maio
+568
+centro
+campo grande
+
+engenheiro edno machado
+1748
+sta emilia
+campo grande
+
+larangeiras 
+1563
+estrela dalva
+campo grande
+
+CLIENTES:
+
+Adriano
+05591178170
+67551151511
+100
+
+agata
+05591178170
+2525288321
+200
+
+baiano
+05591178170
+65565656556
+150
+
+bruno
+05591178170
+55565565656
+50
+
