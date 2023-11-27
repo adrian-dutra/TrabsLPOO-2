@@ -24,6 +24,6 @@ public class Imovel implements Comparable<Imovel>{
 
     @Override
     public String toString(){
-        return "Tipo do Imóvel: " + tipo + ", localizado no endereço: " + endereco + ", de área: " + String.format("%.2f", area) + ", avaliado no valor de R$" + String.format("%.2f", preco) + ", proprietário: " + proprietario;
+        return "Tipo do Imóvel: " + tipo + ", localizado no endereço: " + endereco.toString() + ", de área: " + String.format("%.2f", area) + ", avaliado no valor de R$" + String.format("%.2f", preco) + ", proprietário: " + proprietario;
     }
 }

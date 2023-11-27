@@ -16,4 +16,9 @@ public class Endereco {
     public Endereco(String rua, int numero, String bairro, String cidade){
         this(rua, numero, bairro, cidade, "Sem CEP fornecido");
     }
+
+    @Override
+    public String toString(){
+        return "rua: " + rua + ", numero: " + numero + ", bairro: " + bairro + ", cidade: " + cidade + ", cep: " + cep;
+    }
 }
